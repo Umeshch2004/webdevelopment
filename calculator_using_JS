@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AngularJS Calculator</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <style>
+    body {
+      background-image: url('https://images.rawpixel.com/image_1100/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zNzNiYXRjaDEzLTA4Ni5qcGc.jpg'); /* Add your background image URL here */
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      border: 2px solid #f90961;
+      border-radius: 5px;
+      padding: 20px;
+      width: 300px;
+      margin: 0 auto;
+      background-color: #6db4ee;
+      cursor: move; /* Make the cursor change to indicate draggability */
+    }
+
+    input[type="button"] {
+      width: 60px;
+      height: 40px;
+      margin: 5px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+      background-color: black;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+    }
+  </style>
+</head>
+<body ng-app="calculatorApp">
+
+<div ng-controller="CalculatorController as calcCtrl">
+  <button ng-click="calcCtrl.showCalculator()">Open Calculator</button>
+  <div class="calculator" ng-show="calcCtrl.isCalculatorOpen">
+    <input type="text" ng-model="calcCtrl.expression" disabled><br>
+    <input type="button" ng-click="calcCtrl.appendToExpression('7')" value="7">
+    <input type="button" ng-click="calcCtrl.appendToExpression('8')" value="8">
+    <input type="button" ng-click="calcCtrl.appendToExpression('9')" value="9">
+    <input type="button" ng-click="calcCtrl.appendToExpression('+')" value="+"><br>
+    <input type="button" ng-click="calcCtrl.appendToExpression('4')" value="4">
+    <input type="button" ng-click="calcCtrl.appendToExpression('5')" value="5">
+    <input type="button" ng-click="calcCtrl.appendToExpression('6')" value="6">
+    <input type="button" ng-click="calcCtrl.appendToExpression('-')" value="-"><br>
+    <input type="button" ng-click="calcCtrl.appendToExpression('1')" value="1">
+    <input type="button" ng-click="calcCtrl.appendToExpression('2')" value="2">
+    <input type="button" ng-click="calcCtrl.appendToExpression('3')" value="3">
+    <input type="button" ng-click="calcCtrl.appendToExpression('*')" value="*"><br>
+    <input type="button" ng-click="calcCtrl.appendToExpression('0')" value="0">
+    <input type="button" ng-click="calcCtrl.clear()" value="C">
+    <input type="button" ng-click="calcCtrl.calculate()" value="=">
+    <input type="button" ng-click="calcCtrl.appendToExpression('/')" value="/"><br>
+  </div>
+  <center><div class="result" ng-show="calcCtrl.result !== null">
+    Result: {{ calcCtrl.result }}
+  </div></center>
+</div>
+
+<script>
+  angular.module('calculatorApp', [])
+  .controller('CalculatorController', function() {
+    var vm = this;
+
+    vm.isCalculatorOpen = false;
+    vm.expression = '';
+    vm.result = null;
+
+    vm.showCalculator = function() {
+      vm.isCalculatorOpen = true;
+    };
+
+    vm.appendToExpression = function(value) {
+      vm.expression += value;
+    };
+
+    vm.clear = function() {
+      vm.expression = '';
+      vm.result = null;
+    };
+
+    vm.calculate = function() {
+      try {
+        vm.result = eval(vm.expression);
+      } catch (error) {
+        vm.result = 'Error';
+      }
+    };
+
+    // Make the calculator draggable
+    $(document).ready(function() {
+      $(".calculator").draggable();
+    });
+  });
+</script>
+
+</body>
+</html>
