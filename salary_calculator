@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary Calculator</title>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 2px solid #ddd;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+
+<h2>Salary Calculator</h2>
+<form id="salaryForm">
+    <label for="basicSalary">Basic Salary:</label>
+    <input type="number" id="basicSalary" name="basicSalary" required><br><br>
+   
+    <label for="hraPercentage">HRA Percentage:</label>
+    <input type="number" id="hraPercentage" name="hraPercentage" required><br><br>
+   
+    <label for="daPercentage">DA Percentage:</label>
+    <input type="number" id="daPercentage" name="daPercentage" required><br><br>
+   
+    <label for="pfPercentage">PF Percentage:</label>
+    <input type="number" id="pfPercentage" name="pfPercentage" required><br><br>
+   
+    <label for="taxPercentage">Tax Percentage:</label>
+    <input type="number" id="taxPercentage" name="taxPercentage" required><br><br>
+   
+    <button type="button" onclick="calculateSalary()">Calculate</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+    function calculateSalary() {
+        var basicSalary = parseFloat(document.getElementById('basicSalary').value);
+        var hraPercentage = parseFloat(document.getElementById('hraPercentage').value);
+        var daPercentage = parseFloat(document.getElementById('daPercentage').value);
+        var pfPercentage = parseFloat(document.getElementById('pfPercentage').value);
+        var taxPercentage = parseFloat(document.getElementById('taxPercentage').value);
+
+        var hra = basicSalary * (hraPercentage / 100);
+        var da = basicSalary * (daPercentage / 100);
+        var pf = basicSalary * (pfPercentage / 100);
+        var grossPay = basicSalary + hra + da;
+        var tax = grossPay * (taxPercentage / 100);
+        var deduction = pf + tax;
+        var netPay = grossPay - deduction;
+
+        var resultHTML = "<h3>Salary Details</h3>";
+        resultHTML += "<table>";
+        resultHTML += "<tr><th>Component</th><th>Amount ($)</th></tr>";
+        resultHTML += "<tr><td>Dearness Allowance (DA)</td><td>" + da.toFixed(2) + "</td></tr>";
+        resultHTML += "<tr><td>House Rent Allowance (HRA)</td><td>" + hra.toFixed(2) + "</td></tr>";
+        resultHTML += "<tr><td>Provident Fund (PF)</td><td>" + pf.toFixed(2) + "</td></tr>";
+        resultHTML += "<tr><td>Tax</td><td>" + tax.toFixed(2) + "</td></tr>";
+        resultHTML += "<tr><td>Gross Pay</td><td>" + grossPay.toFixed(2) + "</td></tr>";
+        resultHTML += "<tr><td>Deduction</td><td>" + deduction.toFixed(2) + "</td></tr>";
+        resultHTML += "<tr><td>Net Pay</td><td>" + netPay.toFixed(2) + "</td></tr>";
+        resultHTML += "</table>";
+
+        document.getElementById('result').innerHTML = resultHTML;
+    }
+</script>
+
+</body>
+</html>
