@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+    <title>Student Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <style>
+        .box {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            
+
+            h1 {
+                text-align: center;
+                color: #337ab7;
+            }
+
+            div {
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #fff;
+                box-shadow: 0 50px 50px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            li {
+                margin-bottom: 10px;
+                color: #555;
+            }
+
+        }
+        h1 {
+            text-align: center;
+
+        }
+
+        div {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: black;
+        }
+        li {
+            margin-bottom: 10px;
+            color : black;
+
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #337ab7;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div ng-controller="studentController" ng-if="showDetails">
+        <h1>Student Details</h1>
+        <div class="box">   
+            <h2>Academic Details</h2>
+            <ul>
+                <li>Name: {{student.name}}</li>
+                <li>Roll Number: {{student.rollNumber}}</li>
+                <li>Course: {{student.course}}</li>
+                <li>Batch: {{student.batch}}</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Personal Details</h2>
+            <ul>
+                <li>Age: {{student.age}}</li>
+                <li>Address: {{student.address}}</li>
+                <li>Contact Number: {{student.contactNumber}}</li>
+                <li>Email: {{student.email}}</li>
+                <li>Gender: {{student.gender}}</li>
+                <li>Date of Birth: {{student.dateOfBirth}}</li>
+                <li>Nationality: {{student.nationality}}</li>
+                <li>Emergency Contact: {{student.emergencyContact}}</li>
+            </ul>
+        </div>
+        
+    </div>
+    <button ng-click="showDetails = !showDetails">{{showDetails ? 'Hide' : 'Show'}} Details</button>
+    <script>
+        angular.module('studentApp', [])
+            .controller('studentController', function($scope) {
+                $scope.student = {
+                    name: 'Umesh Chapala',
+                    rollNumber: 'RA2111028010209',
+                    course: 'Computer Science and Engineering',
+                    batch: '2025',
+                    age: 20,
+                    address: 'SRMIST, Kattankulathur, Tamil Nadu, India',
+                    contactNumber: '8688473384',
+                    email: 'uc6133@srmist.edu.in',
+                    gender: 'Male',
+                    dateOfBirth: '25-03-2004',
+                    nationality: 'Indian',
+                    emergencyContact: '8688473384'
+                };
+                $scope.showDetails = false;
+            });
+    </script>
+</body>
+</html>
