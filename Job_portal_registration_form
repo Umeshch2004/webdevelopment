@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>FORM VALIDATION USING JS</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ margin: 0;
+ padding: 0;
+ background-image: url('https://png.pngtree.com/thumb_back/fh260/back_pic/03/76/37/2257bea537b28e6.jpg');
+ background-size: 90% 129%;
+ color: white;
+ }
+
+ h1 {
+ text-align: center;
+ }
+
+ section {
+ max-width: 500px;
+ margin: 0 auto;
+ padding: 20px;
+ border: 1px solid white;
+ border-radius: 20px;
+ box-shadow: 0 100px 100px rgba(0,0,0,0.2);
+ backdrop-filter: blur(50px)
+ }
+
+ form input[type="text"],
+ form input[type="password"],
+ form input[type="confirmassword"],
+ form input[type="email"],
+ form input[type="tel"]
+ {
+ display: block;
+ width: 100%;
+ padding: 10px;
+ margin-bottom: 10px;
+ border-radius: 5px;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+ }
+
+ form input[type="submit"] {
+ background-color: #4CAF50;
+ color: white;
+ padding: 10px 20px;
+ border: none;
+ border-radius: 25px;
+ cursor: pointer;
+ font-size: 16px;
+ }
+
+ form input[type="submit"]:hover {
+ background-color: #aac647;
+ }
+ </style>
+</head>
+<body>
+ <H1>JOB PORTAL-REGISTRATION FORM</H1>
+
+ <script>
+    function validation() {
+      var name = document.myform.name.value;
+      var phoneno = document.myform.tel.value;
+      var password = document.myform.password.value;
+      var confirmPassword = document.myform.confirmPassword.value;
+      var email = document.myform.email.value;
+      var atpos = email.indexOf('@');
+      var dotpos = email.lastIndexOf('.');
+      var qualification = document.myform.qualification.value;
+
+      if (name == "") {
+        alert("Enter name");
+        document.myform.name.focus();
+        return false;
+      }
+
+      if (name.length < 6) {
+        alert("Name must be at least 6 characters long");
+        document.myform.name.focus();
+        return false;
+      }
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long");
+        document.myform.password.focus();
+        return false;
+      }
+      if (confirmPassword !== password) {
+        alert("Passwords do not match");
+        document.myform.confirmPassword.focus();
+        return false;
+      }
+
+      if (isNaN(phoneno) || phoneno.length !== 10) {
+        alert("Please enter a valid 10-digit phone number");
+        document.myform.tel.focus();
+        return false;
+      }
+
+
+     
+      if (true) {
+        alert("Form submitted successfully!");
+
+       
+        event.preventDefault();
+        return false;
+      } else {
+        return false;
+      }
+    }
+  </script>
+<section>
+ <form name="myform" onsubmit="return validation()" >
+ Name: <input type="text" name="name"><br>
+ Password: <input type="password" name="password"><br>
+ Confirm Password: <input type="password" name="confirmPassword"><br>
+ Email: <input type="email" name="email"> <br>
+ Phone number: <input type="tel" name="tel"> <br>
+ Education Qualification: <input type="text" name="qualification"> <br>
+ <center><input type="submit" value="register" onclick="validation()"> </center>
+ </form>
+</section>
+
+</body>
+</html>
